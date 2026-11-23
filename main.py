@@ -11,6 +11,12 @@ import sys
 
 LINE = "I set my alarm for 6am to be productive, but my snooze button filed for overtime."
 
+# Gate the entry before writing: the judge only accepts UTF-8 text of
+# 1-200 characters, a single sentence, not only whitespace.
+assert 1 <= len(LINE) <= 200, "entry line must be 1-200 characters"
+assert LINE.count(".") == 1 and LINE.endswith("."), "entry must be one sentence"
+assert LINE.strip(), "entry must not be only whitespace"
+
 
 def main() -> int:
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
